@@ -1,37 +1,27 @@
-rm(list=ls(all=TRUE))
-
-# -------------------------------
-#        NEM MŰKÖDIK!!!!!
-# -------------------------------
-
-x <- c(1,2,3,4)
-y <- c(2.6,7.2,20.4,55)
-
-summ <- function(temp){
-	s=0
-	for (i in 1:length(x)) {
- 		 s=s+temp[i]
-	}
-	return (s)
+summ <- function(X) {
+    sum = 0
+    for (i in 1:length(X)) {
+        sum = sum + X[i]
+    }
+    return(sum)
 }
 
+expp <- function() {
+    oszto <- ((sumXSquared * n) - (sumX * (-sumX)))
+    a <- ((sumXY * n) - (sumY * (-sumX)))/oszto
+    b <- ((sumX * sumY) - (sumX * sumXY))/oszto
+    plot(x, y)
+    curve(exp(a * x) * exp(b))
+}
+
+x <- c(1, 2, 3, 4)
+y <- c(1, log(2) * exp(20 * 3), 54, 78)
 n <- length(x)
-x_sum <- summ(x)
-y_sum <- summ(y)
+y <- log(y)
+sumX <- summ(x)
+sumY <- summ(y)
+sumXY <- summ(x*y)
+sumXSquared <- summ(x*x)
 
 
-det <- function(a,b,c,d) {
-	return (a*d-c*b)
-}
-
-
-
-a <- det(summ(x*y),y_sum,x_sum,n)/det(summ(x^2),x_sum,x_sum,n)
-
-b <- (y_sum-a*x_sum)/n
-line <- exp(a)*exp(b*x)
-plot(x,line,col=3,lwd=5,type="l",xlim = c(0, 5),ylim = c(0, 60))
-points(x,y,col=2,pch=19,cex=2)
-
-
-
+expp()
